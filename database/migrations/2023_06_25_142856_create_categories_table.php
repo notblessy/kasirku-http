@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+            $table->ulid("id")->primary();
+            $table->char("organization_id", 26);
+            $table->string("name", 100);
+            $table->string("slug", 100);
+            $table->longText("description");
             $table->timestamps();
+            $table->foreign('organization_id')->references('id')->on('organizations');
         });
     }
 
